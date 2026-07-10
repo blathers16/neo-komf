@@ -1,3 +1,8 @@
+
+# neo-komf
+## updated fork of komf because it seems to no longer be maintained
+
+
 # Komga and Kavita Metadata Fetcher
 Download latest version from https://github.com/Snd-R/komf/releases
 
@@ -40,7 +45,7 @@ To run the application using Docker Compose, use the following YAML configuratio
 version: "3.7"
 services:
   komf:
-    image: sndxr/komf:latest
+    image: blathersbugs/neo-komf:latest
     container_name: komf
     ports:
       - "8085:8085"
@@ -74,7 +79,7 @@ docker create \
   -e KOMF_LOG_LEVEL=INFO \
   -v /path/to/config:/config \
   --restart unless-stopped \
-  sndxr/komf:latest
+  blathersbugs/neo-komf:latest
 ```
 
 - if you don't already have a komga or kavita network you'll need to network create a new one
