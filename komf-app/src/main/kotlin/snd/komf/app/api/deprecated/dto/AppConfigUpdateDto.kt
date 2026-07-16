@@ -105,7 +105,6 @@ class MetadataProvidersConfigUpdateDto(
 data class ProvidersConfigUpdateDto(
     val mangaUpdates: ProviderConfigUpdateDto? = null,
     val mal: ProviderConfigUpdateDto? = null,
-    val nautiljon: ProviderConfigUpdateDto? = null,
     val aniList: AniListConfigUpdateDto? = null,
     val yenPress: ProviderConfigUpdateDto? = null,
     val kodansha: ProviderConfigUpdateDto? = null,

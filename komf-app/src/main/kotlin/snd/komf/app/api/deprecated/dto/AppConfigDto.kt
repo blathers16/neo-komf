@@ -96,7 +96,6 @@ data class MetadataProvidersConfigDto(
 data class ProvidersConfigDto(
     val mangaUpdates: ProviderConfigDto,
     val mal: ProviderConfigDto,
-    val nautiljon: ProviderConfigDto,
     val aniList: AniListConfigDto,
     val yenPress: ProviderConfigDto,
     val kodansha: ProviderConfigDto,

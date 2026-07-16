@@ -193,9 +193,6 @@ metadataProviders:
       priority: 20
       enabled: false
       mediaType: "MANGA" # filter used in matching. Can be NOVEL, MANGA or WEBTOON. MANGA type includes everything except novels
-    nautiljon:
-      priority: 30
-      enabled: false
     aniList:
       priority: 40
       enabled: false
