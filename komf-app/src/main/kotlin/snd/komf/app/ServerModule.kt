@@ -10,6 +10,7 @@ import io.ktor.server.http.content.CompressedFileType
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.response.respond
 import io.ktor.server.routing.route
@@ -63,6 +64,10 @@ class ServerModule(
             allowNonSimpleContentTypes = true
         }
         install(SSE)
+        install(DefaultHeaders) {
+            header("Cross-Origin-Embedder-Policy", "require-corp")
+            header("Cross-Origin-Opener-Policy", "same-origin")
+        }
         install(StatusPages) {
             exception<IllegalStateException> { call, cause ->
                 call.respond(
