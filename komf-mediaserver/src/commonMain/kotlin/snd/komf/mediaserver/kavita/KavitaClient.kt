@@ -127,8 +127,7 @@ class KavitaClient(
         val response = ktor.get("api/series/volume") {
             parameter("volumeId", volumeId.value)
         }
-        if (response.status == HttpStatusCode.NoContent || response.status == HttpStatusCode.NotFound)
-            throw KavitaResourceNotFoundException()
+        if (response.status == HttpStatusCode.NoContent) throw snd.komf.mediaserver.kavita.KavitaResourceNotFoundException()
 
         return response.body()
     }
@@ -137,8 +136,7 @@ class KavitaClient(
         val response = ktor.get("api/series/chapter") {
             parameter("chapterId", chapterId.value)
         }
-        if (response.status == HttpStatusCode.NoContent || response.status == HttpStatusCode.NotFound)
-            throw KavitaResourceNotFoundException()
+        if (response.status == HttpStatusCode.NoContent) throw snd.komf.mediaserver.kavita.KavitaResourceNotFoundException()
         return response.body()
     }
 
@@ -174,13 +172,11 @@ class KavitaClient(
         return ktor.get("api/library/libraries").body()
     }
 
-    suspend fun scanSeries(seriesId: KavitaSeriesId, libraryId: KavitaLibraryId) {
+    suspend fun scanSeries(seriesId: KavitaSeriesId) {
         ktor.post("api/series/scan") {
             contentType(ContentType.Application.Json)
-            setBody(buildJsonObject {
-                put("seriesId", seriesId.value)
-                put("libraryId", libraryId.value)
-            })
+            setBody(buildJsonObject { put("seriesId", seriesId.value) })
+
         }
     }
 
@@ -191,9 +187,13 @@ class KavitaClient(
     }
 
     suspend fun resetChapterLock(chapterId: KavitaChapterId) {
-        ktor.post("api/upload/chapter") {
+        ktor.post("api/upload/reset-chapter-lock") {
             contentType(ContentType.Application.Json)
-            setBody(KavitaCoverUploadRequest(id = chapterId.value, url = "", lockCover = false))
+            setBody(buildJsonObject {
+                put("id", chapterId.value)
+                put("url", "")
+            })
+
         }
     }
 
